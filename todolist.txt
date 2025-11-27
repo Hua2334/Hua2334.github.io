@@ -1,0 +1,8 @@
+todo 001(done)
+請幫我設計一個個人網頁主頁 index.html
+必須要包含以下區塊 :
+個人資訊區塊 : 含姓名（Amber Wang）、聯絡方式（Email: 414570576@m365.fju.edu.tw）。
+技能展示區 : 以「標籤雲」呈現我的技能（游泳 英文 跳遠）。
+響應式設計 : 須包含 <meta name="viewport" content="width=device-width, initial-scale=1.0">，並確保手機版（寬度 < 600px）可正常顯示。
+互動與動畫 : 錨點平滑捲動（例如點選 Skills、Projects 會自動滑動至該段），並至少有一處 hover 或過場動畫效果。
+網站選單和區塊的配置風格要接近Youtube的主頁 但是幫我將紅色主配色改為MidnightBlue。

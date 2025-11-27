@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amber Wang — 個人主頁</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo">Amber</div>
+      <nav class="main-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about" class="hero">
+        <div class="hero-left">
+          <h1>Amber Wang</h1>
+          <p class="tagline">個人網頁 / 簡介</p>
+          <p class="contact">Email: <a href="mailto:414570576@m365.fju.edu.tw">414570576@m365.fju.edu.tw</a></p>
+        </div>
+        <div class="hero-right">
+          <div class="avatar" aria-hidden="true">AW</div>
+        </div>
+      </section>
+
+      <section id="skills" class="card">
+        <h2>Skills</h2>
+        <p class="muted">以標籤雲呈現</p>
+        <div class="tag-cloud" aria-label="技能標籤雲">
+          <span class="tag">游泳</span>
+          <span class="tag">英文</span>
+          <span class="tag">跳遠</span>
+        </div>
+      </section>
+
+      <section id="projects" class="card">
+        <h2>Projects</h2>
+        <p class="muted">範例專案區塊（可擴充）</p>
+        <div class="projects-grid">
+          <article class="project-card">示範專案 1</article>
+          <article class="project-card">示範專案 2</article>
+        </div>
+      </section>
+
+      <section id="contact" class="card">
+        <h2>Contact</h2>
+        <p>如果你想聯絡我，請寄信至 <a href="mailto:414570576@m365.fju.edu.tw">414570576@m365.fju.edu.tw</a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Amber Wang</p>
+    </footer>
+
+    <script>
+      // smooth scroll is enabled by CSS (html{scroll-behavior}), but ensure offsets or small JS behaviors
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Optional: add small active-link highlight on scroll
+      const navLinks = document.querySelectorAll('.main-nav a');
+      const sections = Array.from(document.querySelectorAll('main section'));
+
+      function onScroll(){
+        const pos = window.scrollY + 80; // offset
+        for(const s of sections){
+          if(pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight){
+            navLinks.forEach(a => a.classList.remove('active'));
+            const id = s.id;
+            const link = document.querySelector(`.main-nav a[href="#${id}"]`);
+            if(link) link.classList.add('active');
+          }
+        }
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    </script>
+  </body>
+</html>

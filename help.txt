@@ -1,0 +1,5 @@
+啟動本機網站（在terminal執行）
+python3 -m http.server
+
+本機測試網址
+http://localhost:8000/

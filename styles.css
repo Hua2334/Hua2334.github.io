@@ -51,7 +51,7 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
 .timeline-item:nth-child(3){animation-delay:.2s}
 .timeline-marker{margin:0 auto 12px;width:20px;height:20px;border-radius:50%;background:white;border:3px solid var(--brand);box-shadow:0 0 0 6px var(--bg)}
 .timeline-content{display:flex;flex-direction:column;align-items:center;gap:4px}
-.year{color:var(--brand);font-weight:700;font-size:16px;}
+.year{color:var(--brand);font-weight:700;font-size:16px;margin-top:20px;}
 .event{color:var(--muted);font-size:14px}
 
 @keyframes slideInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}

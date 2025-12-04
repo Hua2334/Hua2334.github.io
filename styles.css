@@ -39,6 +39,9 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:10px}
 .tag{display:inline-block;padding:8px 12px;background:linear-gradient(135deg,rgba(25,25,112,0.06),rgba(30,144,255,0.04));border-radius:999px;border:1px solid rgba(25,25,112,0.08);cursor:default;transition:transform .18s ease,box-shadow .18s ease}
 .tag:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 8px 18px rgba(25,25,112,0.12)}
+.tag-red{background-color:#a52a2a;color:white;}
+.tag-brown{background-color:#9f8170;color:white;}
+.tag-green{background-color:#1e4d2b;color:white;}
 
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .project-card{padding:14px;border-radius:10px;background:linear-gradient(90deg,rgba(30,144,255,0.02),white);border:1px solid #eee}

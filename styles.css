@@ -43,7 +43,44 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .project-card{padding:14px;border-radius:10px;background:linear-gradient(90deg,rgba(30,144,255,0.02),white);border:1px solid #eee}
 
+/* Timeline styles - horizontal */
+.timeline{display:flex;gap:24px;align-items:center;justify-content:space-around;padding:20px;position:relative}
+.timeline::before{content:'';position:absolute;top:50%;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand),var(--accent));z-index:0}
+.timeline-item{position:relative;flex:1;text-align:center;animation:slideInUp .5s ease both;z-index:1}
+.timeline-item:nth-child(2){animation-delay:.1s}
+.timeline-item:nth-child(3){animation-delay:.2s}
+.timeline-marker{margin:0 auto 12px;width:20px;height:20px;border-radius:50%;background:white;border:3px solid var(--brand);box-shadow:0 0 0 6px var(--bg)}
+.timeline-content{display:flex;flex-direction:column;align-items:center;gap:4px}
+.year{color:var(--brand);font-weight:700;font-size:16px;}
+.event{color:var(--muted);font-size:14px}
+
+@keyframes slideInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
 .site-footer{text-align:center;padding:20px;color:var(--muted);font-size:14px;margin-top:26px}
+
+/* Portfolio Card Styles */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:column;gap:16px;margin-top:16px}
+.portfolio-card{background:white;border:1px solid #e6e6e6;border-radius:12px;transition:all .22s ease;overflow:hidden}
+.portfolio-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(25,25,112,0.12);border-color:var(--brand)}
+.portfolio-link{display:block;padding:16px;color:inherit;text-decoration:none;height:100%}
+.card-image{width:100%;height:300px;object-fit:cover;border-radius:8px;background:#f0f0f0;display:block;margin-bottom:12px}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card-header h3{margin:0;color:var(--brand);font-size:16px;flex:1}
+.year-badge{display:inline-block;background:rgba(25,25,112,0.08);color:var(--brand);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap}
+.card-description{margin:10px 0;color:#333;font-size:14px;line-height:1.5}
+.roles{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.role{display:inline-block;background:linear-gradient(135deg,rgba(30,144,255,0.1),rgba(25,25,112,0.05));color:var(--brand);padding:4px 8px;border-radius:6px;font-size:12px}
+.card-link{display:inline-block;margin-top:10px;color:var(--brand);text-decoration:none;font-weight:600;transition:all .18s ease}
+.card-link:hover{transform:translateX(4px)}
+
+/* Responsive - mobile */
+/* Responsive - medium and small screens */
+@media (max-width:900px){
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);grid-auto-flow:row}
+}
+@media (max-width:600px){
+  .portfolio-grid{grid-template-columns:1fr;grid-auto-flow:row}
+}
 
 /* subtle entry animation for tags */
 @keyframes floatIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -56,6 +93,24 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
   .main-nav{display:flex;gap:8px}
   .projects-grid{grid-template-columns:1fr}
   .topbar{padding:10px 12px}
+
+  /* Typography and spacing tweaks for better mobile readability */
+  .hero-left h1{font-size:20px}
+  .card{padding:14px}
+  .portfolio-link{padding:12px}
+  .card-header h3{font-size:15px}
+  .card-description{font-size:15px;line-height:1.6}
+  .role{font-size:12px;padding:3px 6px}
+  .year-badge{font-size:11px;padding:3px 8px}
+}
+
+/* Make timeline vertical on small screens for readability */
+@media (max-width:600px){
+  .timeline{flex-direction:column;align-items:flex-start;padding-left:40px}
+  .timeline::before{top:0;left:18px;right:auto;height:100%;width:3px}
+  .timeline-item{text-align:left}
+  .timeline-marker{left:0;margin:6px 0 0 -34px}
+  .timeline-content{align-items:flex-start}
 }
 
 /* Ensure high contrast link focus */

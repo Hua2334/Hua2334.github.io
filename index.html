@@ -40,17 +40,79 @@
       </section>
 
       <section id="projects" class="card">
-        <h2>Projects</h2>
-        <p class="muted">範例專案區塊（可擴充）</p>
-        <div class="projects-grid">
-          <article class="project-card">示範專案 1</article>
-          <article class="project-card">示範專案 2</article>
+        <h2>Experience</h2>
+        <p class="muted">經歷時間軸</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="year">2019</span>
+              <span class="event">參加高雄區游泳比賽</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="year">2024</span>
+              <span class="event">參加桌球社</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="year">2025</span>
+              <span class="event">參加全國游泳競賽</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section id="contact" class="card">
         <h2>Contact</h2>
         <p>如果你想聯絡我，請寄信至 <a href="mailto:414570576@m365.fju.edu.tw">414570576@m365.fju.edu.tw</a></p>
+        <p>Instagram: <a href="https://instagram.com/chyl.07_" target="_blank">@chyl.07_</a></p>
+      </section>
+        <h2>Projects</h2>
+        <p class="muted">作品展示</p>
+        <div class="portfolio-grid">
+          <article class="portfolio-card">
+            <a class="portfolio-link" href="/projects/project1.html">
+              <img class="card-image" src="/images/project1.jpg" alt="橡皮雕刻印章">
+              <div class="card-header">
+                <h3>橡皮雕刻印章</h3>
+                <span class="year-badge">2025</span>
+              </div>
+              <p class="card-description">利用橡皮擦和雕刻刀雕刻出拓印上去的圖案。雕刻了小花，因為喜歡蓬勃生長的花。</p>
+              <div class="roles"><span class="role">創作者</span></div>
+            </a>
+          </article>
+
+          <article class="portfolio-card">
+            <a class="portfolio-link" href="/projects/project2.html">
+              <img class="card-image" src="/images/project2.jpg" alt="化學實驗報告">
+              <div class="card-header">
+                <h3>化學實驗報告</h3>
+                <span class="year-badge">2024</span>
+              </div>
+              <p class="card-description">探討不同操作變量對酵母菌的影響</p>
+              <div class="roles"><span class="role">準備不同數據的試管</span></div>
+            </a>
+          </article>
+
+          <article class="portfolio-card">
+            <a class="portfolio-link" href="/projects/project3.html">
+              <img class="card-image" src="/images/project3.jpg" alt="造型燈">
+              <div class="card-header">
+                <h3>造型燈</h3>
+                <span class="year-badge">2024</span>
+              </div>
+              <p class="card-description">利用壓克力顏料上色並將燈條黏在內部，造成夜光效果。</p>
+              <div class="roles"><span class="role">製作 / 上色</span></div>
+            </a>
+          </article>
+
+          <!-- Fourth card removed per user request -->
+        </div>
       </section>
     </main>
 
@@ -79,6 +141,27 @@
       }
       window.addEventListener('scroll', onScroll);
       onScroll();
+
+      // Smooth anchor scrolling with header offset (accounts for sticky header)
+      (function(){
+        const header = document.querySelector('.topbar');
+        const offset = () => (header ? header.offsetHeight + 12 : 80);
+        // handle same-page anchors
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+          a.addEventListener('click', function(e){
+            const targetId = this.getAttribute('href').slice(1);
+            if(!targetId) return; // allow href="#" or empty
+            const el = document.getElementById(targetId);
+            if(el){
+              e.preventDefault();
+              const top = el.getBoundingClientRect().top + window.scrollY - offset();
+              window.scrollTo({ top, behavior: 'smooth' });
+              // update hash without jumping
+              history.replaceState(null, '', '#'+targetId);
+            }
+          });
+        });
+      })();
     </script>
   </body>
 </html>

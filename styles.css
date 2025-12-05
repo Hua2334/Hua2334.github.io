@@ -16,9 +16,20 @@ body{
 }
 
 .topbar{
-  position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:16px;padding:12px 18px;
+  position:sticky;top:4px;z-index:30;display:flex;align-items:center;gap:16px;padding:12px 18px;
   background:var(--card);border-bottom:1px solid #e6e6e6;box-shadow:0 1px 2px rgba(0,0,0,0.03);
 }
+
+/* Top scroll progress bar */
+#progress-container{position:fixed;left:0;top:0;right:0;height:4px;background:transparent;z-index:60}
+#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width 150ms linear;box-shadow:0 2px 6px rgba(30,30,112,0.12)}
+
+/* Section markers on the progress bar */
+.progress-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.9);border:2px solid rgba(0,0,0,0.06);box-shadow:0 2px 6px rgba(0,0,0,0.08);cursor:pointer;transition:transform .14s ease,background .14s ease;z-index:62}
+.progress-marker:hover{transform:translate(-50%,-50%) scale(1.25)}
+.progress-marker.active{background:var(--brand);border-color:rgba(0,0,0,0.08)}
+.progress-marker[title]::after{content:attr(title);position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:#fff;padding:6px 8px;border-radius:6px;font-size:12px;white-space:nowrap;display:none}
+.progress-marker:hover::after{display:block}
 .logo{font-weight:700;color:var(--brand);background:linear-gradient(90deg,var(--brand),#2b3b8c);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:20px}
 .main-nav{margin-left:auto;display:flex;gap:12px}
 .main-nav a{color:#333;text-decoration:none;padding:8px 10px;border-radius:6px;transition:all .18s ease}

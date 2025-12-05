@@ -7,18 +7,22 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div id="progress-container" aria-hidden="true">
+      <div id="progress-bar"></div>
+    </div>
     <header class="topbar">
       <div class="logo">Amber</div>
       <nav class="main-nav">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <main>
-      <section id="about" class="hero">
+  <section id="about" class="hero" data-title="About">
         <div class="hero-left">
           <h1>Amber Wang</h1>
           <p class="tagline">個人網頁 / 簡介</p>
@@ -29,7 +33,7 @@
         </div>
       </section>
 
-      <section id="skills" class="card">
+  <section id="skills" class="card" data-title="Skills">
         <h2>Skills</h2>
         <p class="muted">以標籤雲呈現</p>
         <div class="tag-cloud" aria-label="技能標籤雲">
@@ -39,7 +43,7 @@
         </div>
       </section>
 
-      <section id="projects" class="card">
+      <section id="experience" class="card" data-title="Experience">
         <h2>Experience</h2>
         <p class="muted">經歷時間軸</p>
         <div class="timeline">
@@ -54,7 +58,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <span class="year">2024</span>
-              <span class="event">參加桌球社</span>
+              <span class="event">加入桌球社</span>
             </div>
           </div>
           <div class="timeline-item">
@@ -67,11 +71,7 @@
         </div>
       </section>
 
-      <section id="contact" class="card">
-        <h2>Contact</h2>
-        <p>如果你想聯絡我，請寄信至 <a href="mailto:414570576@m365.fju.edu.tw">414570576@m365.fju.edu.tw</a></p>
-        <p>Instagram: <a href="https://instagram.com/chyl.07_" target="_blank">@chyl.07_</a></p>
-      </section>
+  <section id="projects" class="card" data-title="Projects">
         <h2>Projects</h2>
         <p class="muted">作品展示</p>
         <div class="portfolio-grid">
@@ -113,6 +113,12 @@
 
           <!-- Fourth card removed per user request -->
         </div>
+      </section>
+
+  <section id="contact" class="card" data-title="Contact">
+        <h2>Contact</h2>
+        <p>如果你想聯絡我，請寄信至 <a href="mailto:414570576@m365.fju.edu.tw">414570576@m365.fju.edu.tw</a></p>
+        <p>Instagram: <a href="https://instagram.com/chyl.07_" target="_blank">@chyl.07_</a></p>
       </section>
     </main>
 
@@ -161,6 +167,74 @@
             }
           });
         });
+      })();
+
+      // Scroll progress bar
+      (function(){
+        const progressBar = document.getElementById('progress-bar');
+        if(!progressBar) return;
+        function update(){
+          const scrollTop = window.scrollY || window.pageYOffset;
+          const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+          const pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+          progressBar.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', update, {passive:true});
+        window.addEventListener('resize', update);
+        update();
+      })();
+
+      // Progress bar section markers (clickable)
+      (function(){
+        const container = document.getElementById('progress-container');
+        if(!container) return;
+  // Only show markers for a selected set of important sections.
+  const allowed = ['about','experience','projects','contact'];
+  const sections = Array.from(document.querySelectorAll('main section[id]')).filter(s => allowed.includes(s.id));
+        // create markers
+        const markers = sections.map(sec => {
+          const btn = document.createElement('button');
+          btn.className = 'progress-marker';
+          // use a friendly label (capitalize id or use data-title)
+          const label = sec.getAttribute('data-title') || sec.id.replace(/[-_]/g,' ');
+          btn.title = label;
+          btn.dataset.target = sec.id;
+          container.appendChild(btn);
+          btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            const header = document.querySelector('.topbar');
+            const offset = header ? header.offsetHeight + 12 : 80;
+            const top = sec.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({top, behavior:'smooth'});
+          });
+          return {sec, btn};
+        });
+
+        function positionMarkers(){
+          const scrollable = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+          markers.forEach(({sec, btn})=>{
+            const top = sec.getBoundingClientRect().top + window.scrollY;
+            const pct = scrollable > 0 ? (top / scrollable) * 100 : 0;
+            btn.style.left = pct + '%';
+          });
+        }
+
+        function updateActiveMarker(){
+          const cur = window.scrollY + (document.querySelector('.topbar')?.offsetHeight || 80) + 8;
+          markers.forEach(({sec, btn})=>{
+            if(cur >= sec.offsetTop && cur < sec.offsetTop + sec.offsetHeight){
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+
+        window.addEventListener('resize', positionMarkers);
+        window.addEventListener('scroll', updateActiveMarker, {passive:true});
+        // initial
+        positionMarkers();
+        updateActiveMarker();
       })();
     </script>
   </body>

@@ -16,9 +16,21 @@ body{
 }
 
 .topbar{
-  position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:16px;padding:12px 18px;
+  position:sticky;top:4px;z-index:30;display:flex;align-items:center;gap:16px;padding:12px 18px;
   background:var(--card);border-bottom:1px solid #e6e6e6;box-shadow:0 1px 2px rgba(0,0,0,0.03);
 }
+
+/* Top scroll progress bar */
+#progress-container{position:fixed;left:0;top:0;right:0;height:4px;background:transparent;z-index:60}
+#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width 150ms linear;box-shadow:0 2px 6px rgba(30,30,112,0.12)}
+
+/* Section markers on the progress bar */
+.progress-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.9);border:2px solid rgba(0,0,0,0.06);box-shadow:0 2px 6px rgba(0,0,0,0.08);cursor:pointer;transition:transform .14s ease,background .14s ease;z-index:62;outline:none}
+.progress-marker:hover{transform:translate(-50%,-50%) scale(1.25)}
+.progress-marker:focus{outline:2px solid var(--accent);outline-offset:2px}
+.progress-marker.active{background:var(--brand);border-color:rgba(0,0,0,0.08)}
+.progress-marker[title]::after{content:attr(title);position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:#fff;padding:6px 8px;border-radius:6px;font-size:12px;white-space:nowrap;display:none}
+.progress-marker:hover::after{display:block}
 .logo{font-weight:700;color:var(--brand);background:linear-gradient(90deg,var(--brand),#2b3b8c);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:20px}
 .main-nav{margin-left:auto;display:flex;gap:12px}
 .main-nav a{color:#333;text-decoration:none;padding:8px 10px;border-radius:6px;transition:all .18s ease}
@@ -39,6 +51,9 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:10px}
 .tag{display:inline-block;padding:8px 12px;background:linear-gradient(135deg,rgba(25,25,112,0.06),rgba(30,144,255,0.04));border-radius:999px;border:1px solid rgba(25,25,112,0.08);cursor:default;transition:transform .18s ease,box-shadow .18s ease}
 .tag:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 8px 18px rgba(25,25,112,0.12)}
+.tag-red{background-color:#a52a2a;color:white;}
+.tag-brown{background-color:#9f8170;color:white;}
+.tag-green{background-color:#1e4d2b;color:white;}
 
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .project-card{padding:14px;border-radius:10px;background:linear-gradient(90deg,rgba(30,144,255,0.02),white);border:1px solid #eee}
@@ -53,6 +68,7 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
 .timeline-content{display:flex;flex-direction:column;align-items:center;gap:4px}
 .year{color:var(--brand);font-weight:700;font-size:16px;margin-top:20px;}
 .event{color:var(--muted);font-size:14px}
+.event-desc{color:#999;font-size:12px;margin-top:6px;display:block;line-height:1.4;font-style:italic}
 
 @keyframes slideInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
@@ -111,6 +127,7 @@ main{max-width:var(--max-width);margin:22px auto;padding:0 18px}
   .timeline-item{text-align:left}
   .timeline-marker{left:0;margin:6px 0 0 -34px}
   .timeline-content{align-items:flex-start}
+  .event-desc{font-size:13px;margin-top:4px}
 }
 
 /* Ensure high contrast link focus */

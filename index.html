@@ -201,17 +201,34 @@
           // use a friendly label (capitalize id or use data-title)
           const label = sec.getAttribute('data-title') || sec.id.replace(/[-_]/g,' ');
           btn.title = label;
+          btn.setAttribute('aria-label', `Jump to ${label} section`);
+          btn.setAttribute('tabindex', '0');
           btn.dataset.target = sec.id;
           container.appendChild(btn);
+          
+          // Click handler for mouse
           btn.addEventListener('click', (e)=>{
             e.preventDefault();
-            const header = document.querySelector('.topbar');
-            const offset = header ? header.offsetHeight + 12 : 80;
-            const top = sec.getBoundingClientRect().top + window.scrollY - offset;
-            window.scrollTo({top, behavior:'smooth'});
+            scrollToSection(sec);
           });
+          
+          // Keyboard handler (Enter/Space)
+          btn.addEventListener('keydown', (e)=>{
+            if(e.key === 'Enter' || e.key === ' '){
+              e.preventDefault();
+              scrollToSection(sec);
+            }
+          });
+          
           return {sec, btn};
         });
+        
+        function scrollToSection(sec){
+          const header = document.querySelector('.topbar');
+          const offset = header ? header.offsetHeight + 12 : 80;
+          const top = sec.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({top, behavior:'smooth'});
+        }
 
         function positionMarkers(){
           const scrollable = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;

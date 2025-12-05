@@ -45,27 +45,45 @@
 
       <section id="experience" class="card" data-title="Experience">
         <h2>Experience</h2>
-        <p class="muted">經歷時間軸</p>
+        <p class="muted">經歷時間軸（點擊展開詳情）</p>
         <div class="timeline">
-          <div class="timeline-item">
+          <div class="timeline-item collapsible">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <span class="year">2019</span>
-              <span class="event">參加高雄區游泳比賽</span>
+              <button class="timeline-toggle" aria-expanded="false" aria-label="展開 2019 高雄區游泳比賽詳情">
+                <span class="year">2019</span>
+                <span class="event">參加高雄區游泳比賽</span>
+                <span class="toggle-icon">▼</span>
+              </button>
+              <div class="timeline-details" hidden>
+                <p class="event-desc">第一次參賽，獲得寶貴比賽經驗與團隊支持。透過這次比賽，我認識到堅持與紀律的重要性。</p>
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item collapsible">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <span class="year">2024</span>
-              <span class="event">加入桌球社</span>
+              <button class="timeline-toggle" aria-expanded="false" aria-label="展開 2024 桌球社詳情">
+                <span class="year">2024</span>
+                <span class="event">加入桌球社</span>
+                <span class="toggle-icon">▼</span>
+              </button>
+              <div class="timeline-details" hidden>
+                <p class="event-desc">參與校內桌球活動並擔任活動協助。在這個社團中，我學到了團隊合作與領導的基本原則。</p>
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item collapsible">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <span class="year">2025</span>
-              <span class="event">參加全國游泳競賽</span>
+              <button class="timeline-toggle" aria-expanded="false" aria-label="展開 2025 全國游泳競賽詳情">
+                <span class="year">2025</span>
+                <span class="event">參加全國游泳競賽</span>
+                <span class="toggle-icon">▼</span>
+              </button>
+              <div class="timeline-details" hidden>
+                <p class="event-desc">代表學校出賽，挑戰更高水準的競技。這次競賽是我多年訓練的成果展現，也是為下一階段做準備。</p>
+              </div>
             </div>
           </div>
         </div>
@@ -252,6 +270,29 @@
         // initial
         positionMarkers();
         updateActiveMarker();
+      })();
+
+      // Feature/A: Collapsible Timeline functionality
+      (function(){
+        const toggles = document.querySelectorAll('.timeline-toggle');
+        toggles.forEach(toggle => {
+          toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            const details = toggle.nextElementSibling;
+            if(details && details.classList.contains('timeline-details')){
+              details.hidden = isExpanded;
+            }
+          });
+          
+          // Keyboard support (Enter/Space)
+          toggle.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' || e.key === ' '){
+              e.preventDefault();
+              toggle.click();
+            }
+          });
+        });
       })();
     </script>
   </body>
